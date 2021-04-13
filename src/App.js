@@ -28,19 +28,13 @@ const App = () => {
   const [treeData, setTreeData] = useState({});
   const [selected, setSelected] = useState([]);
 
-
-  // Creates the tree structure data
-  
   useEffect(() => {
-    const nest = (items, id = "0", link = 'parent') =>
-      items.filter(item => item[link] === id).map(item => ({ ...item, children: nest(items, item.id) }));
-      
     setIsLoading(true);
-    axios.get("/treedata111").then((response) => {
+    axios.get("/treedata").then((response) => {
       if (response.data?.categories.length > 0) {
         let treeData = nest(response.data.categories);
         setTreeData({
-          name: 'Parent',
+          name: 'Categories',
           id: 0,
           count: 0,
           children: treeData
@@ -49,12 +43,18 @@ const App = () => {
     }).catch((error) => {
       setIsError(true);
       setErrorMessage('sorry something went wrong');
+      console.log(error);
     }).finally(() => {
       setIsLoading(false);
     });
+
+    // Creates the tree structure data
+    const nest = (items, id = "0", link = 'parent') =>
+      items.filter(item => item[link] === id).map(item => ({ ...item, children: nest(items, item.id) }));
+
   }, [])
 
-  const handleClose = (event, reason) => {
+  const handleClose = (reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -97,6 +97,7 @@ const App = () => {
     return getAllChild(getNodeById(node, id));
   }
 
+  // Get the clicked tree node and its childs
   const getOnChange = (checked, nodes) => {
     const allNode = getChildById(treeData, nodes.id);
     let array = checked
@@ -108,6 +109,7 @@ const App = () => {
     setSelected(array);
   }
 
+  // Renders the tree items based on the nodes
   const renderTree = (nodes) => {
     return (
       <TreeItem
@@ -138,6 +140,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1>Categories Tree View</h1>
       <div>
         {isError &&
           <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
