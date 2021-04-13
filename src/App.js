@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   root: {
     height: 110,
     flexGrow: 1,
-    maxWidth: '10%',
+    maxWidth: '100%',
   },
 });
 
@@ -32,20 +32,23 @@ const App = () => {
   // Creates the tree structure data
   
   useEffect(() => {
-    const nest = (items, id = "null", link = 'parent') =>
+    const nest = (items, id = "0", link = 'parent') =>
       items.filter(item => item[link] === id).map(item => ({ ...item, children: nest(items, item.id) }));
       
     setIsLoading(true);
-    axios.get("/treedata").then((response) => {
+    axios.get("/treedata111").then((response) => {
       if (response.data?.categories.length > 0) {
         let treeData = nest(response.data.categories);
-        if (treeData.length > 0) {
-          setTreeData(treeData[0]);
-        }
+        setTreeData({
+          name: 'Parent',
+          id: 0,
+          count: 0,
+          children: treeData
+        });
       }
     }).catch((error) => {
       setIsError(true);
-      setErrorMessage(error);
+      setErrorMessage('sorry something went wrong');
     }).finally(() => {
       setIsLoading(false);
     });
@@ -121,7 +124,7 @@ const App = () => {
                 onClick={e => e.stopPropagation()}
               />
             }
-            label={`${nodes.name}(${nodes.count})`}
+            label={nodes.name}
             key={nodes.id}
           />
         }

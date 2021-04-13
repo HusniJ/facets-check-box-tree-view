@@ -2,12 +2,6 @@
     "TreeData": {
         "categories": [
             {
-                "id": "0",
-                "count": 1,
-                "parent": "null",
-                "name": "Parent"
-            },
-            {
                 "id": "14096",
                 "count": 137,
                 "parent": "14100",
