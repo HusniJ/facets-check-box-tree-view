@@ -6,7 +6,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { CircularProgress, makeStyles, Snackbar, Checkbox, FormControlLabel } from '@material-ui/core';
+import { CircularProgress, makeStyles, Snackbar, Checkbox, FormControlLabel, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -141,6 +141,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Categories Tree View</h1>
+
       <div>
         {isError &&
           <Snackbar open={isError} autoHideDuration={6000} onClose={handleClose}>
@@ -152,13 +153,23 @@ const App = () => {
           <div>
             <CircularProgress />
           </div> :
-          <TreeView
-            className={classes.root}
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpandIcon={<ChevronRightIcon />}
-          >
-            {renderTree(treeData)}
-          </TreeView>}
+          <div>
+            <div className="buttons-div">
+              <Button variant="contained" color="secondary" onClick={() => getOnChange(true, treeData)}>
+                Check All
+            </Button>
+              <Button variant="contained" onClick={() => getOnChange(false, treeData)}>
+                Un-Check All
+            </Button>
+            </div>
+            <br />
+            <TreeView
+              className={classes.root}
+              defaultCollapseIcon={<ExpandMoreIcon />}
+              defaultExpandIcon={<ChevronRightIcon />}
+            >
+              {renderTree(treeData)}
+            </TreeView></div>}
       </div>
     </div>
   );

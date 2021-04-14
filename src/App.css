@@ -1,11 +1,16 @@
 .App {
   text-align: left;
   margin-left: 1%;
+  width: 25%;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.buttons-div button {
+  margin-right: 10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
