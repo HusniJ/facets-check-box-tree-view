@@ -165,7 +165,7 @@ const App = () => {
                 </Button>
               </div>
               <br />
-              <Tree data={[treeData]} />
+              <Tree data={[treeData]} getOnChange={getOnChange} selected={selected}  />
             </div>
         }
       </div>

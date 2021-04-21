@@ -3,15 +3,14 @@ import { Checkbox } from "@material-ui/core";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tree from './Tree';
 
-const TreeNode = ({ node }) => {
+const TreeNode = ({ node, getOnChange, selected }) => {
     const [childVisible, setChildVisiblity] = useState(false);
-    const [checked, setChecked] = useState(false);
-    const hasChild = node.children.length > 0;
+    const hasChild = node.children?.length > 0;
 
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
-
+    const onChecked = (checked, node) => {
+        console.log(checked, node);
+        getOnChange(checked, node);
+    }
     return (
         <li className="d-tree-node border-0">
             <div className="d-flex d-flex-container" onClick={(e) => setChildVisiblity((visibility) => !visibility)}>
@@ -23,11 +22,11 @@ const TreeNode = ({ node }) => {
 
                 <div className="col d-tree-head">
                     <Checkbox
-                        checked={checked}
-                        onChange={handleChange}
+                        checked={selected.some(item => item === node.id)}
+                        onChange={event => onChecked(event.currentTarget.checked, node)}
+                        onClick={e => e.stopPropagation()}
                         inputProps={{ 'aria-label': 'primary checkbox' }}
                     />
-                    {/* <i className={`mr-1 ${node.icon}`}> </i> */}
                     {node.name}
                 </div>
             </div>
@@ -35,7 +34,12 @@ const TreeNode = ({ node }) => {
             {hasChild && childVisible && (
                 <div className="d-tree-content">
                     <ul className="d-flex d-tree-container flex-column">
-                        <Tree data={node.children} />
+                        {/* <Tree data={node.children} onChange={getOnChange} selected={selected} /> */}
+                        {
+                            node.children.map((tree) => (
+                                <TreeNode node={tree} getOnChange={getOnChange} selected={selected} />
+                            ))
+                        }
                     </ul>
                 </div>
             )}
