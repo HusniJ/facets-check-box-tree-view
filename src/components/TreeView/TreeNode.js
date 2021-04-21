@@ -34,7 +34,6 @@ const TreeNode = ({ node, getOnChange, selected }) => {
             {hasChild && childVisible && (
                 <div className="d-tree-content">
                     <ul className="d-flex d-tree-container flex-column">
-                        {/* <Tree data={node.children} onChange={getOnChange} selected={selected} /> */}
                         {
                             node.children.map((tree) => (
                                 <TreeNode node={tree} getOnChange={getOnChange} selected={selected} />
