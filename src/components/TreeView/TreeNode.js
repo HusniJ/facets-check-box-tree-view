@@ -21,6 +21,7 @@ const TreeNode = ({ node, getOnChange, selected }) => {
                         onChange={event => getOnChange(event.currentTarget.checked, node)}
                         onClick={e => e.stopPropagation()}
                         inputProps={{ 'aria-label': 'primary checkbox' }}
+                        data-testid={`checkbox-${node.id}`}
                     />
                     {node.name}
                 </div>
