@@ -3,6 +3,6 @@ import App from './App';
 
 test('renders header for tree view', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Categories Tree View/);
+  const linkElement = screen.getByText(/Categories Selection/);
   expect(linkElement).toBeInTheDocument();
 });
