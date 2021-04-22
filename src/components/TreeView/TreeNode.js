@@ -14,7 +14,7 @@ const TreeNode = ({ node, getOnChange, selected }) => {
                         <FontAwesomeIcon icon="angle-right" />
                     </div>
                 )}
-                &nbsp;&nbsp;
+                &nbsp;
                 <div className="col d-tree-head d-tree-label">
                     <Checkbox
                         checked={selected.some(item => item === node.id)}
