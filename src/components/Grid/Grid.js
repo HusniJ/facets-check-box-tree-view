@@ -7,11 +7,11 @@ const Grid = ({ selected = [], data = [] }) => {
         { field: 'count', headerName: 'Count', flex: 0.5 },
     ];
     return (
-        <div style={{ height: '350px', width: '100%' }}>
+        <div style={{ height: '370px', width: '100%' }}>
             <DataGrid
                 columns={columns}
                 rows={data.filter(item => selected.includes(item.id))}
-                pageSize={10}
+                pageSize={5}
                 rowsPerPageOptions={[5, 10, 20, 50, 100]}
             />
         </div>
