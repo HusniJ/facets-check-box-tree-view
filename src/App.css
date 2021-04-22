@@ -1,7 +1,6 @@
 .App {
-  text-align: left;
   margin-left: 1%;
-  width: 35%;
+  width: 99%;
 }
 
 .App-logo {
@@ -61,11 +60,30 @@ iframe
   transform: rotate(45deg);
 }
 
+.d-tree-label {
+  cursor: pointer;
+}
+
 .d-node {
   top: 20%;
   position: absolute;
 }
 
 .d-flex-container {
+  position: relative;
+}
+
+.tree-container {
+  width: 33%;
+  margin-right: 2%;
+  height: 350px;
+  overflow-y: auto;
+}
+
+.grid-container {
+  width: 60%;
+}
+
+.spinner-div {
   position: relative;
 }
