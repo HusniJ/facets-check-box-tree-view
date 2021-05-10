@@ -3,7 +3,6 @@ import axios from 'axios';
 import MuiAlert from '@material-ui/lab/Alert';
 import { CircularProgress, Snackbar, Button } from '@material-ui/core';
 import Tree from './components/TreeView/Tree';
-import Grid from './components/Grid/Grid';
 import './App.css';
 
 const Alert = (props) => {
@@ -20,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("/treedata").then((response) => {
+    axios.get("/checkboxdata").then((response) => {
       if (response.data?.categories.length > 0) {
         response.data.categories.push({
           name: 'Categories',
@@ -135,9 +134,6 @@ const App = () => {
               <div className="d-flex">
                 <div className="tree-container">
                   <Tree data={[treeData]} getOnChange={getOnChange} selected={selected} />
-                </div>
-                <div className="grid-container">
-                  <Grid data={rawData} selected={selected} />
                 </div>
               </div>
             </div>
